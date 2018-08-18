@@ -15,7 +15,7 @@ public class AddNewActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.add_new_toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayShowTitleEnabled(false);
+        ab.setTitle("New Course");
         ab.setDisplayHomeAsUpEnabled(true);
     }
 }
