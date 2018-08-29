@@ -17,7 +17,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/courseNameEntry"
         android:layout_width="350dp"
         android:layout_height="51dp"
         android:layout_marginEnd="16dp"
@@ -38,10 +38,10 @@
         android:layout_marginTop="8dp"
         android:entries="@array/week_array"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/courseNameEntry" />
 
     <TimePicker
-        android:id="@+id/timePicker1"
+        android:id="@+id/timePickerStart"
         android:layout_width="252dp"
         android:layout_height="123dp"
         android:layout_marginEnd="8dp"
@@ -51,14 +51,14 @@
         app:layout_constraintTop_toBottomOf="@+id/weekSpinner" />
 
     <TimePicker
-        android:id="@+id/timePicker2"
+        android:id="@+id/timePickerEnd"
         android:layout_width="250dp"
         android:layout_height="123dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker1" />
+        app:layout_constraintTop_toBottomOf="@+id/timePickerStart" />
 
     <TextView
         android:id="@+id/textView"
@@ -68,7 +68,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="52dp"
         android:text="@string/start_time"
-        app:layout_constraintEnd_toStartOf="@+id/timePicker1"
+        app:layout_constraintEnd_toStartOf="@+id/timePickerStart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weekSpinner" />
 
@@ -80,9 +80,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="52dp"
         android:text="@string/end_time"
-        app:layout_constraintEnd_toStartOf="@+id/timePicker2"
+        app:layout_constraintEnd_toStartOf="@+id/timePickerEnd"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker1" />
+        app:layout_constraintTop_toBottomOf="@+id/timePickerStart" />
 
     <TextView
         android:id="@+id/textView3"
@@ -92,6 +92,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/day"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/courseNameEntry" />
+
 
 </android.support.constraint.ConstraintLayout>

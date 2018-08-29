@@ -14,8 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
+
+import java.util.Calendar;
+
+
 public class MainActivity extends AppCompatActivity implements
         HomeFragment.OnFragmentInteractionListener {
+    private CalendarView mCalendarView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -58,6 +65,15 @@ public class MainActivity extends AppCompatActivity implements
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        mCalendarView = findViewById(R.id.calendarView);
+        try {
+            mCalendarView.setDate(calendar);
+        } catch (OutOfDateRangeException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
