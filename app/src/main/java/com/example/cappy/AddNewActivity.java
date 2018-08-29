@@ -6,9 +6,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class AddNewActivity extends AppCompatActivity {
 
@@ -22,17 +26,16 @@ public class AddNewActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setTitle("New Course");
         ab.setDisplayHomeAsUpEnabled(true);
-//        createSpinner();
+
+        Calendar c = Calendar.getInstance();
+        String today = c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        setSpinner(R.id.weekSpinner, today);
     }
 
-//    private void createSpinner(){
-//        Spinner spinner = (Spinner) findViewById(R.id.weekSpinner);
-//        // Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//                R.array.week_array, android.R.layout.simple_spinner_item);
-//        // Specify the layout to use when the list of choices appears
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        // Apply the adapter to the spinner
-//        spinner.setAdapter(adapter);
-//    }
+    private void setSpinner(int spinnerId, String date){
+        Spinner spinner = findViewById(spinnerId);
+        ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
+        int spinnerPos = adapter.getPosition(date);
+        spinner.setSelection(spinnerPos);
+    }
 }
