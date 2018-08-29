@@ -1,5 +1,6 @@
 package com.example.cappy;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,10 +13,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import com.applandeo.materialcalendarview.EventDay;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class AddNewActivity extends AppCompatActivity {
@@ -34,6 +39,7 @@ public class AddNewActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         String today = c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
         setSpinner(R.id.weekSpinner, today);
+
     }
 
     @Override
@@ -63,5 +69,18 @@ public class AddNewActivity extends AppCompatActivity {
     }
 
     public void addCourse(){
+        EditText editText = findViewById(R.id.courseNameEntry);
+        String name = editText.getText().toString();
+        Spinner spinner = findViewById(R.id.weekSpinner);
+        String weekday  = spinner.getSelectedItem().toString();
+        TimePicker startTime = findViewById(R.id.timePickerStart);
+        int hour = startTime.getHour();
+        int min  = startTime.getMinute();
+        String time = Integer.toString(hour) + Integer.toString(min);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        ArrayList<String> values = new ArrayList<>(Arrays.asList(name, weekday, time));
+        intent.putExtra("NEW_COURSE_VALUES", values);
+        startActivity(intent);
     }
 }

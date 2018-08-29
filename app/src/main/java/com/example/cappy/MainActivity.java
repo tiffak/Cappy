@@ -15,14 +15,21 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements
         HomeFragment.OnFragmentInteractionListener {
     private CalendarView mCalendarView;
+    protected List<EventDay> events;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -74,7 +81,39 @@ public class MainActivity extends AppCompatActivity implements
         } catch (OutOfDateRangeException e) {
             e.printStackTrace();
         }
+
+        events = new ArrayList<>();
+
+        Intent intent = getIntent();
+        if (intent != null && intent.getStringArrayListExtra("NEW_COURSE_VALUES") != null){
+            ArrayList<String> values = intent.getStringArrayListExtra("NEW_COURSE_VALUES");
+            Calendar courseDay = Calendar.getInstance();
+//            LocalDate localDate = getDate(values.get(1));
+//            courseDay.set(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
+            events.add(new EventDay(calendar, R.drawable.ic_event_black_24dp));
+        }
+
+        mCalendarView.setEvents(events);
     }
+
+//    private LocalDate getDate(String weekday){
+//        LocalDate localDate = LocalDate.now();
+//        LocalDate targetDate = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+//        if (weekday.equals("Tuesday")){
+//            targetDate = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.TUESDAY));
+//        } else if (weekday.equals("Wednesday")){
+//            targetDate = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.WEDNESDAY));
+//        } else if (weekday.equals("Thursday")){
+//            targetDate = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.THURSDAY));
+//        } else if (weekday.equals("Friday")){
+//            targetDate = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY));
+//        } else if (weekday.equals("Saturday")){
+//            targetDate = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.SATURDAY));
+//        } else if (weekday.equals("Sunday")){
+//            targetDate = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+//        }
+//       return targetDate;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
